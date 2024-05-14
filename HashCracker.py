@@ -5,9 +5,17 @@ import os
 def hash_cracker(password_hash, password_list):
     """Password hash crack using a common password list."""
     for password in password_list:
-        hashed_password = hashlib.md5(password.encode()).hexdigest()
-        if hashed_password == password_hash:
+        # Hash the password using MD5
+        hashed_password_md5 = hashlib.md5(password.encode()).hexdigest()
+        if hashed_password_md5 == password_hash:
             return password
+
+        # Hash the password using SHA-256
+        hashed_password_sha256 = hashlib.sha256(password.encode()).hexdigest()
+        if hashed_password_sha256 == password_hash:
+            return password
+
+    # Return None if password is not found
     return None
 
 
